@@ -88,6 +88,23 @@
             };
         }
 
+        public static Result<T> InvalidToken(List<ValidationError> validationErrors)
+        {
+            return new Result<T>(ResultStatus.Tk_Invalid)
+            {
+                ValidationErrors = validationErrors
+            };
+        }
+        public static Result<T> InvalidToken(string id, string message)
+        {
+            return new Result<T>(ResultStatus.Tk_Invalid)
+            {
+                ValidationErrors = new List<ValidationError>()
+                {
+                    new ValidationError(id,message)
+                }
+            };
+        }
         /// <summary>
         /// Creates a new Result of T with a status of 'Error' passing a single error
         /// </summary>

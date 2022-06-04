@@ -17,5 +17,6 @@ namespace RLH.Result
         Error,
         Db_Deleted,
         Db_Modified,
+        Tk_Invalid
     }
 }
