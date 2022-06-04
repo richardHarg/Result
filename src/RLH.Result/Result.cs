@@ -116,6 +116,22 @@
             };
         }
 
+        public static Result<T> Deleted(string key)
+        {
+            return new Result<T>(ResultStatus.Db_Deleted)
+            {
+                ValidationErrors = new List<ValidationError>() { new ValidationError(key, $"Entity with Id '{key}' has been deleted from the backing store")  }
+            };
+        }
+
+        public static Result<T> Modified(List<ValidationError> validationErrors)
+        {
+            return new Result<T>(ResultStatus.Db_Modified)
+            {
+                ValidationErrors = validationErrors
+            };
+        }
+
 
         /// <summary>
         /// Get the returned Value(T) 

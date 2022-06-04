@@ -14,6 +14,8 @@ namespace RLH.Result
         Success,
         NotFound,
         Invalid,
-        Error
+        Error,
+        Db_Deleted,
+        Db_Modified,
     }
 }
