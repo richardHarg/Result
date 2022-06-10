@@ -12,8 +12,11 @@ Both Result and ResultOf can be created using the below static methods:
 RESULTOF SPECIFIC:
 
 Method: Success(T Value)
+   
 ProducesStatus: ResultStatus.Success
+   
 Parameters: Object of T which is returned along with the result
+   
 Result: A new instance of ResultOf is returned with the above status, indicates the task this result represents completed OK. The returned value can be accessed 
 via the 'Value' property. 
 
