@@ -9,6 +9,8 @@ For a method which return an object use 'ResultOf T' where T = the type of objec
 
 e.g. public myClass DoSomethingAndReturnInstanceOfMyClass() == public ResultOf<myClass> DoSomethingAndReturnInstanceOfMyClass()
 
+---------------------------------
+   
 Both Result and ResultOf can be created using the below static methods:
 
 RESULTOF SPECIFIC:
@@ -42,6 +44,7 @@ Parameters: n/a
    
 Result: A new instance of Result/ResultOf is returned with the above status and no additional errors.
 
+---------------------------------
    
 Method: Invalid(List<ValidationError> validationErrors)
    
@@ -51,6 +54,7 @@ Parameters:  A list of validation errors
    
 Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property. 
 
+---------------------------------
    
 Method: Invalid(string id, string message)
    
@@ -60,6 +64,7 @@ Parameters:  A key value and message which is parsed into a ValidationError and 
    
 Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property. 
 
+---------------------------------
    
 Method: Error(params string[] errors)
    
@@ -69,6 +74,7 @@ Parameters:  An array of error strings which are added to the internal collectio
    
 Result: A new instance of Result/ResultOf is returned with the above status, general errors can be accessed via the 'Errors' property.
 
+---------------------------------
    
 Method: Error(string error)
    
@@ -78,6 +84,7 @@ Parameters:  A single error message which is added to the internal collection
    
 Result: A new instance of Result/ResultOf is returned with the above status, general errors can be accessed via the 'Errors' property.
    
+---------------------------------
 
 TOKEN SPECIFIC:
   
@@ -89,6 +96,7 @@ Parameters:  A list of validation errors
    
 Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property. 
 
+---------------------------------
    
 Method: InvalidToken(string id, string message)
    
@@ -98,6 +106,7 @@ Parameters:  A key value and message which is parsed into a ValidationError and 
    
 Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property. 
   
+---------------------------------
   
 DATABASE CONCURRENCY ENTITY SPECIFIC:
   
@@ -109,6 +118,7 @@ Parameters:  The Key value of the database object which no longer exists which i
    
 Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property. 
   
+---------------------------------
    
 Method: Modified(List<ValidationError> validationErrors)
    
