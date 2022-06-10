@@ -1,4 +1,9 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace RLH.Result
 {
     public interface IResult
@@ -6,6 +11,5 @@ namespace RLH.Result
         ResultStatus Status { get; }
         List<ValidationError> ValidationErrors { get; }
         IEnumerable<string> Errors { get; }
-        Object ReturnValue();
     }
 }

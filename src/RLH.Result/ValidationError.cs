@@ -2,7 +2,8 @@
 namespace RLH.Result
 {
     public sealed class ValidationError
-    {
+    { 
+    
         /// <summary>
         /// Id/name of the property/field this validation error relates to
         /// </summary>

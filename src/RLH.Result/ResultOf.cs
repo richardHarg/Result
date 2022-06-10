@@ -1,45 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RLH.Result
+﻿namespace RLH.Result
 {
-    public class Result : IResult
+    public class ResultOf<T> : Result, IResultOf<T>
     {
         /// <summary>
         /// Private constructor passing through a status
         /// </summary>
         /// <param name="status">Status to set new Result to</param>
-        protected Result(ResultStatus status)
+        private ResultOf(ResultStatus status) : base(status)
         {
-            Status = status;
+
+        }
+        /// <summary>
+        /// Private constructor passing through status and return value
+        /// </summary>
+        /// <param name="status">Status to set new Result to</param>
+        /// <param name="value">Value of T to pass back</param>
+        private ResultOf(ResultStatus status,T value) : base(status)
+        {
+            Value = value;
         }
 
+        /// <summary>
+        /// Return value of this Result
+        /// </summary>
+        public T Value { get; }
 
 
         /// <summary>
-        /// Status of the Result
+        /// Creates a new Result of T with a status of 'Success' passing through the return object
         /// </summary>
-        public ResultStatus Status { get; protected set; } = ResultStatus.Success;
-        /// <summary>
-        /// List of ValidationErrors related to this Result
-        /// </summary>
-        public List<ValidationError> ValidationErrors { get; protected set; } = new List<ValidationError>();
-        /// <summary>
-        /// List of general errors related to this Result
-        /// </summary>
-        public IEnumerable<string> Errors { get; protected set; } = new List<string>();
-
+        /// <param name="value">Object of type T to return</param>
+        /// <returns>New Result of T</returns>
+        public static ResultOf<T> Success(T value)
+        {
+            return new ResultOf<T>(ResultStatus.Success, value);
+        }
 
         /// <summary>
         /// Creates a new Result of T with a status of 'NotFound' for when an entity cannot be located
         /// </summary>
         /// <returns>New Result of T</returns>
-        public static Result NotFound()
+        public static new ResultOf<T> NotFound()
         {
-            return new Result(ResultStatus.NotFound);
+            return new ResultOf<T>(ResultStatus.NotFound);
         }
 
         /// <summary>
@@ -47,23 +50,22 @@ namespace RLH.Result
         /// </summary>
         /// <param name="validationErrors">List of validation Errors linked to this request</param>
         /// <returns>New Result of T</returns>
-        public static Result Invalid(List<ValidationError> validationErrors)
+        public static new ResultOf<T> Invalid(List<ValidationError> validationErrors)
         {
-            return new Result(ResultStatus.Invalid)
+            return new ResultOf<T>(ResultStatus.Invalid)
             {
                 ValidationErrors = validationErrors
             };
         }
-
         /// <summary>
         /// Creates a new Result of T with a status of 'Invalid' passing a single validation error
         /// </summary>
         /// <param name="id">Id of the field/property this validation error relates to</param>
         /// <param name="message">Details of the validation error</param>
         /// <returns>New Result of T</returns>
-        public static Result Invalid(string id, string message)
+        public static new ResultOf<T> Invalid(string id,string message)
         {
-            return new Result(ResultStatus.Invalid)
+            return new ResultOf<T>(ResultStatus.Invalid)
             {
                 ValidationErrors = new List<ValidationError>()
                 {
@@ -72,17 +74,16 @@ namespace RLH.Result
             };
         }
 
-        public static Result InvalidToken(List<ValidationError> validationErrors)
+        public static new ResultOf<T> InvalidToken(List<ValidationError> validationErrors)
         {
-            return new Result(ResultStatus.Tk_Invalid)
+            return new ResultOf<T>(ResultStatus.Tk_Invalid)
             {
                 ValidationErrors = validationErrors
             };
         }
-
-        public static Result InvalidToken(string id, string message)
+        public static new ResultOf<T> InvalidToken(string id, string message)
         {
-            return new Result(ResultStatus.Tk_Invalid)
+            return new ResultOf<T>(ResultStatus.Tk_Invalid)
             {
                 ValidationErrors = new List<ValidationError>()
                 {
@@ -95,9 +96,9 @@ namespace RLH.Result
         /// </summary>
         /// <param name="validationErrors">Error linked to this request</param>
         /// <returns>New Result of T</returns>
-        public static Result Error(string error)
+        public static new ResultOf<T> Error(string error)
         {
-            return new Result(ResultStatus.Error)
+            return new ResultOf<T>(ResultStatus.Error)
             {
                 Errors = new List<string>()
                 {
@@ -110,25 +111,25 @@ namespace RLH.Result
         /// </summary>
         /// <param name="errors">Collection of error strings associated with the Result</param>
         /// <returns>New Result of T</returns>
-        public static Result Error(params string[] errors)
+        public static new ResultOf<T> Error(params string[] errors)
         {
-            return new Result(ResultStatus.Error)
+            return new ResultOf<T>(ResultStatus.Error)
             {
                 Errors = errors
             };
         }
 
-        public static Result Deleted(string key)
+        public static new ResultOf<T> Deleted(string key)
         {
-            return new Result(ResultStatus.Db_Deleted)
+            return new ResultOf<T>(ResultStatus.Db_Deleted)
             {
-                ValidationErrors = new List<ValidationError>() { new ValidationError(key, $"Entity with Id '{key}' has been deleted from the backing store") }
+                ValidationErrors = new List<ValidationError>() { new ValidationError(key, $"Entity with Id '{key}' has been deleted from the backing store")  }
             };
         }
 
-        public static Result Modified(List<ValidationError> validationErrors)
+        public static new ResultOf<T> Modified(List<ValidationError> validationErrors)
         {
-            return new Result(ResultStatus.Db_Modified)
+            return new ResultOf<T>(ResultStatus.Db_Modified)
             {
                 ValidationErrors = validationErrors
             };
