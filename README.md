@@ -50,7 +50,7 @@ Method: Error(string error)
 ProducesStatus: ResultStatus.Error
 Parameters:  A single error message which is added to the internal collection
 Result: A new instance of Result/ResultOf is returned with the above status, general errors can be accessed via the 'Errors' property.
-  
+   
 
 TOKEN SPECIFIC:
   
