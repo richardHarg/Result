@@ -134,5 +134,10 @@
                 ValidationErrors = validationErrors
             };
         }
+
+        public static new ResultOf<T> NoContent()
+        {
+            return new ResultOf<T>(ResultStatus.NoContent);
+        }
     }
 }

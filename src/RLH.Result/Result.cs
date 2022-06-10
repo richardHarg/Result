@@ -143,5 +143,10 @@ namespace RLH.Result
                 ValidationErrors = validationErrors
             };
         }
+
+        public static Result NoContent()
+        {
+            return new Result(ResultStatus.NoContent);
+        }
     }
 }
