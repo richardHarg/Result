@@ -34,6 +34,16 @@ namespace RLH.Result
 
 
         /// <summary>
+        /// Creates a new Result of T with a status of 'Success' passing through the return object
+        /// </summary>
+        /// <param name="value">Object of type T to return</param>
+        /// <returns>New Result of T</returns>
+        public static Result Success()
+        {
+            return new Result(ResultStatus.Success);
+        }
+
+        /// <summary>
         /// Creates a new Result of T with a status of 'NotFound' for when an entity cannot be located
         /// </summary>
         /// <returns>New Result of T</returns>
