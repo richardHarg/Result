@@ -14,7 +14,8 @@ RESULTOF SPECIFIC:
 Method: Success(T Value)
 ProducesStatus: ResultStatus.Success
 Parameters: Object of T which is returned along with the result
-Result: A new instance of ResultOf is returned with the above status, indicates the task this result represents completed OK. The returned value can be accessed via the 'Value' property. 
+Result: A new instance of ResultOf is returned with the above status, indicates the task this result represents completed OK. The returned value can be accessed 
+via the 'Value' property. 
 
 RESULT SPECIFIC:
 
