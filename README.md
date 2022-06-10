@@ -75,4 +75,4 @@ Result: A new instance of Result/ResultOf is returned with the above status, val
 Method: Modified(List<ValidationError> validationErrors)
 ProducesStatus: ResultStatus.Db_Modified
 Parameters: A list of validation errors
-Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property. 
+Result: A new instance of Result/ResultOf is returned with the above status, validation errors can be accessed via the 'ValidationErrors' property.
