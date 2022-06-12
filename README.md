@@ -1,3 +1,109 @@
+---
+OVERVIEW
+
+---
+
+Library is used to provide a way to return complex results from Methods.
+
+---
+USAGE
+
+Result or ResultOf<T> should be used as the Method return type, Return where NO data is required and ResultOf<T> when return data of type T is required. This has been nested within a Task<> return type for async Methods.
+
+Both classes contains a status (default success) as well as a collection of validation errors and collection of general errors. Depending on the statis set these collections are populated and give information on the error/s encountered during the Method.
+
+A Number of static Methods can be called on Result/ResultOf to create a return object with the desired status/errors, these are detailed below.
+
+---
+METHODS
+
+---
+
+Method: Success()
+
+Parameters: n/a
+
+Applies To: Result
+
+Details: 
+
+Creates a new Result instance with the status of 'Success'
+
+Example:
+
+	Result ReturnResult()
+	{
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: Success(T value)
+
+Parameters: Instance of Type T
+
+Applies To: ResultOf<T>
+
+Details: 
+
+Creates a new ResultOf<T> instance with the status of 'Success' and sets the value to the provided parameter.
+
+Example:
+
+	ResultOf<MyClass> ReturnResultOf()
+	{
+		// Method work...
+
+		var returnValue = new MyClass();
+
+		return ResultOf<MyClass>.Success(returnValue);
+	}
+
+---
+
+Method: NotFound()
+
+Parameters: n/a
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'NotFound', used when a required resource cannot be located
+
+Example:
+
+	Result DoWorkWhichRequiresUserExists(string userId)
+	{
+		User user = GetUserById(userId);
+
+		if (user == null)
+		{
+			return Result.NotFound();
+		}
+
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Utility classes to allow for more complex return information from methods.
 
 USAGE
