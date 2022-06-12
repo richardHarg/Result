@@ -74,6 +74,11 @@
             };
         }
 
+        /// <summary>
+        /// Creates a new Result of T with a status of 'TK_Invalid' passing a collection of validation error
+        /// </summary>
+        /// <param name="validationErrors">Collection of validation errors related to token validation</param>
+        /// <returns>New Result of T</returns>
         public static new ResultOf<T> InvalidToken(IEnumerable<ValidationError> validationErrors)
         {
             return new ResultOf<T>(ResultStatus.Tk_Invalid)
@@ -81,6 +86,13 @@
                 ValidationErrors = validationErrors.ToList()
             };
         }
+
+        /// <summary>
+        /// Creates a new Result of T with a status of 'TK_Invalid' passing a collection of validation error
+        /// </summary>
+        /// <param name="id">Id of the field/property this validation error relates to</param>
+        /// <param name="message">Details of the validation error</param>
+        /// <returns>New Result of T</returns>
         public static new ResultOf<T> InvalidToken(string id, string message)
         {
             return new ResultOf<T>(ResultStatus.Tk_Invalid)
@@ -119,6 +131,7 @@
             };
         }
 
+     
         public static new ResultOf<T> Deleted(string key)
         {
             return new ResultOf<T>(ResultStatus.Db_Deleted)
