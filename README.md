@@ -152,6 +152,16 @@ Result: A new instance of Result/ResultOf is returned with the above status and 
 
 ---------------------------------
    
+Method: NoContent()
+   
+ProducesStatus: ResultStatus.NoContent
+   
+Parameters: n/a
+   
+Result: A new instance of Result/ResultOf is returned with the above status and no additional errors.
+
+---------------------------------
+   
 Method: Invalid(List<ValidationError> validationErrors)
    
 ProducesStatus: ResultStatus.Invalid
