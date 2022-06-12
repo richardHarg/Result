@@ -15,6 +15,41 @@ Both classes contains a status (default success) as well as a collection of vali
 A Number of static Methods can be called on Result/ResultOf to create a return object with the desired status/errors, these are detailed below.
 
 ---
+CLASSES
+
+---
+
+Both Result and ResultOf expose the below Properties:
+
+ResultStatus Status - Defaults to the Success value of the ResultStatus Enum below.
+
+	public enum ResultStatus
+    {
+        Success,
+        NotFound,
+        Invalid,
+        Error,
+        Db_Deleted,
+        Db_Modified,
+        Tk_Invalid,
+        NoContent
+    }
+
+List<ValidationError> ValidationErrors - List of any validation errors assocated with the result. The ValidationError class consists of the below Properties:
+
+        /// <summary>
+        /// Id/name of the property/field this validation error relates to
+        /// </summary>
+        public readonly string Id;
+        /// <summary>
+        /// Details of the error message associated with this validation error
+        /// </summary>
+        public readonly string Message;
+
+List<string> Errors - List of any general errors associated with the result.
+
+---
+
 METHODS
 
 ---
