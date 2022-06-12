@@ -30,7 +30,7 @@ namespace RLH.Result
         /// <summary>
         /// List of general errors related to this Result
         /// </summary>
-        public IEnumerable<string> Errors { get; protected set; } = new List<string>();
+        public List<string> Errors { get; protected set; } = new List<string>();
 
 
         /// <summary>
@@ -57,11 +57,11 @@ namespace RLH.Result
         /// </summary>
         /// <param name="validationErrors">List of validation Errors linked to this request</param>
         /// <returns>New Result of T</returns>
-        public static Result Invalid(List<ValidationError> validationErrors)
+        public static Result Invalid(IEnumerable<ValidationError> validationErrors)
         {
             return new Result(ResultStatus.Invalid)
             {
-                ValidationErrors = validationErrors
+                ValidationErrors = validationErrors.ToList()
             };
         }
 
@@ -82,11 +82,11 @@ namespace RLH.Result
             };
         }
 
-        public static Result InvalidToken(List<ValidationError> validationErrors)
+        public static Result InvalidToken(IEnumerable<ValidationError> validationErrors)
         {
             return new Result(ResultStatus.Tk_Invalid)
             {
-                ValidationErrors = validationErrors
+                ValidationErrors = validationErrors.ToList()
             };
         }
 
@@ -120,11 +120,11 @@ namespace RLH.Result
         /// </summary>
         /// <param name="errors">Collection of error strings associated with the Result</param>
         /// <returns>New Result of T</returns>
-        public static Result Error(params string[] errors)
+        public static Result Error(IEnumerable<string> errors)
         {
             return new Result(ResultStatus.Error)
             {
-                Errors = errors
+                Errors = errors.ToList()
             };
         }
 
@@ -136,11 +136,11 @@ namespace RLH.Result
             };
         }
 
-        public static Result Modified(List<ValidationError> validationErrors)
+        public static Result Modified(IEnumerable<ValidationError> validationErrors)
         {
             return new Result(ResultStatus.Db_Modified)
             {
-                ValidationErrors = validationErrors
+                ValidationErrors = validationErrors.ToList()
             };
         }
 

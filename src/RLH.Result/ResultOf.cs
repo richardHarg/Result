@@ -50,11 +50,11 @@
         /// </summary>
         /// <param name="validationErrors">List of validation Errors linked to this request</param>
         /// <returns>New Result of T</returns>
-        public static new ResultOf<T> Invalid(List<ValidationError> validationErrors)
+        public static new ResultOf<T> Invalid(IEnumerable<ValidationError> validationErrors)
         {
             return new ResultOf<T>(ResultStatus.Invalid)
             {
-                ValidationErrors = validationErrors
+                ValidationErrors = validationErrors.ToList()
             };
         }
         /// <summary>
@@ -74,11 +74,11 @@
             };
         }
 
-        public static new ResultOf<T> InvalidToken(List<ValidationError> validationErrors)
+        public static new ResultOf<T> InvalidToken(IEnumerable<ValidationError> validationErrors)
         {
             return new ResultOf<T>(ResultStatus.Tk_Invalid)
             {
-                ValidationErrors = validationErrors
+                ValidationErrors = validationErrors.ToList()
             };
         }
         public static new ResultOf<T> InvalidToken(string id, string message)
@@ -111,11 +111,11 @@
         /// </summary>
         /// <param name="errors">Collection of error strings associated with the Result</param>
         /// <returns>New Result of T</returns>
-        public static new ResultOf<T> Error(params string[] errors)
+        public static new ResultOf<T> Error(IEnumerable<string> errors)
         {
             return new ResultOf<T>(ResultStatus.Error)
             {
-                Errors = errors
+                Errors = errors.ToList()
             };
         }
 
@@ -127,11 +127,11 @@
             };
         }
 
-        public static new ResultOf<T> Modified(List<ValidationError> validationErrors)
+        public static new ResultOf<T> Modified(IEnumerable<ValidationError> validationErrors)
         {
             return new ResultOf<T>(ResultStatus.Db_Modified)
             {
-                ValidationErrors = validationErrors
+                ValidationErrors = validationErrors.ToList()
             };
         }
 

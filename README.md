@@ -150,6 +150,291 @@ Example:
 
 ---
 
+Method: Invalid(IEnumerable<ValidationError> validationErrors)
+
+Parameters: Collection of validationErrors associated with the result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Invalid'. Details can be accessed via the 'ValidationErrors' property of the returned result.
+
+Example:
+
+	Result DoWorkWhichRequiresValidation(string email,string age)
+	{
+        var validationErrors = new List<ValidationError>();
+
+        if (EmailInUse(email) == true)
+        {
+            validationErrors.Add(new ValidationError("email","The email provided is already in use."));
+        }
+        if (age < 18)
+        {
+            validationErrors.Add(new ValidationError("age","You must be over 18 to use this service."));
+        }
+		
+        if (validationErrors.Any() == true)
+        {
+            return Result.Invalid(validationErrors)
+        }
+
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: Invalid(string id,string message)
+
+Parameters: Details of a single validation error associated with the Result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Invalid'. Details can be accessed via the 'ValidationErrors' property of the returned result.
+
+Example:
+
+	Result DoWorkWhichRequiresValidation(string email)
+	{
+        if (EmailInUse(email) == true)
+        {
+            return Result.Invalid("email","The email provided is already in use.");
+        }
+        
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: InvalidToken(IEnumerable<ValidationError> validationErrors)
+
+Parameters: Collection of validationErrors associated with the result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Tk_Invalid'. Details can be accessed via the 'ValidationErrors' property of the returned result. This should be used when specific action is required when a token is invalid as opposed to any general validation error.
+
+Example:
+
+	Result DoWorkWhichRequiresValidToken(string token)
+	{
+        var validationErrors = new List<ValidationError>();
+
+        if (TokenIsCurrent(token)== false)
+        {
+            validationErrors.Add(new ValidationError("token","Out of date token."));
+        }
+        if (TokenAudienceValid(token) == false)
+        {
+            validationErrors.Add(new ValidationError("token","Invalid token audience"));
+        }
+		
+        if (validationErrors.Any() == true)
+        {
+            return Result.InvalidToken(validationErrors)
+        }
+
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: InvalidToken(string id,string message)
+
+Parameters: Details of a single validation error associated with the Result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Tk_Invalid'. Details can be accessed via the 'ValidationErrors' property of the returned result. This should be used when specific action is required when a token is invalid as opposed to any general validation error.
+
+Example:
+
+	Result DoWorkWhichRequiresValidToken(string token)
+	{
+        if (TokenIsCurrent(token)== false)
+        {
+            return Result.InvalidToken("token","Out of date token.");
+        }
+       
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: Error(string error)
+
+Parameters: Details of a single error associated with the Result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Error'. Details can be accessed via the 'Errors' property of the returned result.
+
+Example:
+
+	Result DoWorkWhichCouldError()
+	{
+        if (SomeConditionWhichCouldFail == false)
+        {
+            return Result.Error("Details of a general error go here");
+        }
+       
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: Error(IEnumerable<string> errors)
+
+Parameters: Collection of general errors associated with this Result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Error'. Details can be accessed via the 'Errors' property of the returned result.
+
+Example:
+
+	Result DoWorkWhichCouldError()
+	{
+        var errors = new List<string>();
+
+        if (SomeConditionWhichCouldFail() == false)
+        {
+            errors.Add("Details of a general error go here");
+        }
+       
+        if (AnotherPossibleError() == false)
+        {
+            errors.Add("Details of another general error go here");
+        }
+
+        if (errors.Any() == true)
+        {
+           return Result.Error(errors);
+        }
+
+
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: Deleted(string key)
+
+Parameters: The primary key value of the database object which has been deleted
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Db_Deleted'. Details can be accessed via the 'Errors' property of the returned result. This is used when managing database concurrency operations.
+
+Example:
+
+	Result DoWorkWithDatabase(MyClass value)
+	{
+        try
+        {
+            SomeDatabaseOperation(value);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var databaseEntry = exceptionEntry.GetDatabaseValues();
+
+            // If there is no Db entry then the entity was deleted
+            if (databaseEntry == null)
+            {
+                return Result.Deleted(value.Id);
+            }
+        }
+
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+Method: Modified(IEnumerable<ValidationError> validationErrors)
+
+Parameters: Collection of Validation errors associated with this result
+
+Applies To: Result/ResultOf
+
+Details: 
+
+Creates a new Result instance with the status of 'Db_Modified'. Details can be accessed via the 'ValidationErrors' property of the returned result. This is used when managing database concurrency operations where a db entity has been updated.
+
+Example:
+
+	Result DoWorkWithDatabase(MyClass entity)
+	{
+        try
+        {
+            SomeDatabaseOperation(value);
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            var databaseEntry = exceptionEntry.GetDatabaseValues();
+
+            // If there is no Db entry then the entity was deleted
+            if (databaseEntry == null)
+            {
+                return Result.Deleted(value.Id);
+            }
+            else
+            {
+                // Get the current values from the Database
+                var databaseValues = (User)databaseEntry.ToObject();
+
+                var updateResult = new List<ValidationError>();
+
+                if (databaseValues.Email != entity.Email)
+                {
+                    updateResult.Add(new ValidationError("Email", $"Field 'Email' updated by 3rd party. Current value '{databaseValues.Email}'"));
+                }
+                
+                if (databaseValues.PasswordHash != entity.PasswordHash)
+                {
+                    updateResult.Add(new ValidationError("PasswordHash", $"Field 'PasswordHash' updated by 3rd party."));
+                }
+
+                return Result.Modified(updateResult);
+            }
+
+        }
+        
+
+		// Method work...
+
+		return Result.Success();
+	}
+
+---
+
+
 
 
 

@@ -10,6 +10,6 @@ namespace RLH.Result
     {
         ResultStatus Status { get; }
         List<ValidationError> ValidationErrors { get; }
-        IEnumerable<string> Errors { get; }
+        List<string> Errors { get; }
     }
 }
