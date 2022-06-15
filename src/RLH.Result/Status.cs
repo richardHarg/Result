@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RLH.Result
+namespace RLH.Results
 {
     /// <summary>
     /// Details of various states a Result instance can be returned in

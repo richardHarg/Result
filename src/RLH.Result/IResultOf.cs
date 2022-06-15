@@ -1,5 +1,5 @@
 ﻿
-namespace RLH.Result
+namespace RLH.Results
 {
     public interface IResultOf<T> : IResult
     {

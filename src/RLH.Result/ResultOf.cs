@@ -1,4 +1,4 @@
-﻿namespace RLH.Result
+﻿namespace RLH.Results
 {
     public class ResultOf<T> : Result, IResultOf<T>
     {
