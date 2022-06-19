@@ -197,5 +197,21 @@
                 }
             };
         }
+
+        /// <summary>
+        /// Allows the details of one ResultOf instance to be copied and returned into another
+        /// of a different type. Status,Errors and ValidationErrors are copied.
+        /// </summary>
+        /// <typeparam name="Y"></typeparam>
+        /// <param name="resultToCopy"></param>
+        /// <returns></returns>
+        public static ResultOf<T> FromResult<Y>(ResultOf<Y> resultToCopy)
+        {
+            return new ResultOf<T>(resultToCopy.Status)
+            {
+                Errors = resultToCopy.Errors,
+                ValidationErrors = resultToCopy.ValidationErrors
+            };
+        }
     }
 }
