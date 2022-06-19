@@ -18,6 +18,10 @@ namespace RLH.Results
         Db_Deleted,
         Db_Modified,
         Tk_Invalid,
-        NoContent
+        NoContent,
+        Auth_Locked,
+        Auth_Unverified,
+        Auth_TwoFactor,
+        Auth_Password
     }
 }

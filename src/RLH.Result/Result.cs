@@ -148,5 +148,50 @@ namespace RLH.Results
         {
             return new Result(ResultStatus.NoContent);
         }
+
+
+        public static Result AuthLocked(string error)
+        {
+            return new Result(ResultStatus.Auth_Locked)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
+
+        public static Result AuthUnverified(string error)
+        {
+            return new Result(ResultStatus.Auth_Unverified)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
+
+        public static Result AuthTwoFactorFailed(string error)
+        {
+            return new Result(ResultStatus.Auth_TwoFactor)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
+
+        public static Result AuthPasswordFailed(string error)
+        {
+            return new Result(ResultStatus.Auth_Password)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
     }
 }

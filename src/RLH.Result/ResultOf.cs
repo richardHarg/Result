@@ -152,5 +152,50 @@
         {
             return new ResultOf<T>(ResultStatus.NoContent);
         }
+
+
+        public static new ResultOf<T> AuthLocked(string error)
+        {
+            return new ResultOf<T>(ResultStatus.Auth_Locked)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
+
+        public static new ResultOf<T> AuthUnverified(string error)
+        {
+            return new ResultOf<T>(ResultStatus.Auth_Unverified)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
+
+        public static new ResultOf<T> AuthTwoFactorFailed(string error)
+        {
+            return new ResultOf<T>(ResultStatus.Auth_TwoFactor)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
+
+        public static new ResultOf<T> AuthPasswordFailed(string error)
+        {
+            return new ResultOf<T>(ResultStatus.Auth_Password)
+            {
+                Errors = new List<string>()
+                {
+                    error
+                }
+            };
+        }
     }
 }
