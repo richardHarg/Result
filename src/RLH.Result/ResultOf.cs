@@ -205,7 +205,7 @@
         /// <typeparam name="Y"></typeparam>
         /// <param name="resultToCopy"></param>
         /// <returns></returns>
-        public static ResultOf<T> FromResult<Y>(ResultOf<Y> resultToCopy)
+        public static ResultOf<T> FromResult(IResult resultToCopy)
         {
             return new ResultOf<T>(resultToCopy.Status)
             {
@@ -213,5 +213,7 @@
                 ValidationErrors = resultToCopy.ValidationErrors
             };
         }
+
+       
     }
 }
