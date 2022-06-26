@@ -10,7 +10,7 @@ USAGE
 
 Result or ResultOf<T> should be used as the Method return type, Return where NO data is required and ResultOf<T> when return data of type T is required. This has been nested within a Task<> return type for async Methods.
 
-Both classes contains a status (default success) as well as a collection of validation errors and collection of general errors. Depending on the statis set these collections are populated and give information on the error/s encountered during the Method.
+Both classes contains a status (default success) as well as a collection of validation errors and collection of general errors. Depending on the status set these collections are populated and give information on the error/s encountered during the Method.
 
 A Number of static Methods can be called on Result/ResultOf to create a return object with the desired status/errors, these are detailed below.
 
